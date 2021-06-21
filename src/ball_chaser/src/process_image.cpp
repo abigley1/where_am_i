@@ -8,7 +8,11 @@ ros::ServiceClient client;
 // This function calls the command_robot service to drive the robot in the specified direction
 void drive_robot(float lin_x, float ang_z)
 {
-    // TODO: Request a service and pass the velocities to it to drive the robot
+    ROS_INFO_STREAM("sending command to acuatior"); // TODO: Request a service and pass the velocities to it to drive the robot
+    ball_chaser::DriveToTarget srv;
+    srv.request.linear.x = lin_x;
+    srv.request.angular.z = ang_z;
+    client.call(srv)
 }
 
 // This callback function continuously executes and reads the image data
@@ -16,7 +20,28 @@ void process_image_callback(const sensor_msgs::Image img)
 {
 
     int white_pixel = 255;
-
+    bool no_ball = true;
+    
+    //looping
+    
+    for (int i = 0; i < img.height * img.step; i++) {
+        if (img.data[i] == white_pixel){
+            no_ball = false;
+            int found_pixel = i;
+            double pixel_pos = (i % img.width) / img.width);
+            if (pixel_pos >= 0 & pixel_pos < .33) { //drive left\
+                drive_robot(0, -0.5);     
+            }
+            if (pixel_pos > .33 & pixel_pos < .66){ //srive stright 
+                drive_robot(1, 0);
+            }
+            if (pixel_pos > .66 & pixel_pos =< 1){ //drive right
+                drive_robot(0, 0.5);
+            }
+            if (no_ball == true){ //stop if no ball
+                drive_robot(0,0);
+            }
+            
     // TODO: Loop through each pixel in the image and check if there's a bright white one
     // Then, identify if this pixel falls in the left, mid, or right side of the image
     // Depending on the white ball position, call the drive_bot function and pass velocities to it
