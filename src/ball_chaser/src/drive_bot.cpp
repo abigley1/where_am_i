@@ -47,17 +47,8 @@ int main(int argc, char** argv)
     //ros::Subscriber sub1 = n.subscriber("/ball_chaser/joint_states", 10, handle_drive_request)
                       
     // TODO: Delete the loop, move the code to the inside of the callback function and make the necessary changes to publish the requested velocities instead of constant values
-    while (ros::ok()) {
-        // Create a motor_command object of type geometry_msgs::Twist
-        geometry_msgs::Twist motor_command;
-        // Set wheel velocities, forward [0.5, 0.0]
-        motor_command.linear.x = 0.5;
-        motor_command.angular.z = 0.0;
-        // Publish angles to drive the robot
-        motor_command_publisher.publish(motor_command);
-    }
-        // TODO: Handle ROS communication events
-    //ros::spin();
+
+    ros::spin();
 
     return 0;
 }
