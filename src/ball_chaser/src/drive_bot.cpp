@@ -10,7 +10,7 @@ ros::Publisher motor_command_publisher;
 // This function should publish the requested linear x and angular velocities to the robot wheel joints
 // After publishing the requested velocities, a message feedback should be returned with the requested wheel velocities
 
-bool handle_drive_request(ball_chaser::Drive_To_Target::Request& req , ball_chaser::Drive_To_Target::Response& res)
+bool handle_drive_request(ball_chaser::DriveToTarget::Request& req , ball_chaser::DriveToTarget::Response& res)
 {  
     ROS_INFO("DRIVE TO TARGET REQUEST RECIEVED");
     geometry_msgs::Twist mv_cmd;
@@ -19,7 +19,7 @@ bool handle_drive_request(ball_chaser::Drive_To_Target::Request& req , ball_chas
     motor_command_publisher.publish(mv_cmd);
     
     
-    res.msg_feedback = "motor velocities set at " + std::to_string() ;
+    res.msg_feedback = "motor velocities set at " ;
     ROS_INFO_STREAM(res.msg_feedback);
     
     
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
     motor_command_publisher = n.advertise<geometry_msgs::Twist>("/cmd_vel", 10);
 
     // TODO: Define a drive /ball_chaser/command_robot service with a handle_drive_request callback function              
-    ros::ServiceSerer( service = n.advertiseService("/ball_chaser/command_robot" , handle_drive_request);
+    ros::ServiceServer service = n.advertiseService("/ball_chaser/command_robot" , handle_drive_request);
                       
     //ros::Subscriber sub1 = n.subscriber("/ball_chaser/joint_states", 10, handle_drive_request)
                       
