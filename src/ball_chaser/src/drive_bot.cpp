@@ -2,6 +2,7 @@
 #include "geometry_msgs/Twist.h"
 //TODO: Include the ball_chaser "DriveToTarget" header file
 #include "ball_chaser/DriveToTarget.h"
+#include <string>
 
 // ROS::Publisher motor commands;
 ros::Publisher motor_command_publisher;
@@ -12,14 +13,14 @@ ros::Publisher motor_command_publisher;
 
 bool handle_drive_request(ball_chaser::DriveToTarget::Request& req , ball_chaser::DriveToTarget::Response& res)
 {  
-    ROS_INFO("DRIVE TO TARGET REQUEST RECIEVED");
+    
     geometry_msgs::Twist mv_cmd;
     mv_cmd.linear.x = req.linear_x;
     mv_cmd.angular.z = req.angular_z;
     motor_command_publisher.publish(mv_cmd);
-    
-    
-    res.msg_feedback = "motor velocities set at " ;
+    std::string lin_x = std::to_string(req.linear_x);
+    std::string ang_z = std::to_string(req.angular_z);
+    res.msg_feedback = "Commanded velocities X:"+lin_x+" Z:"+ang_z;
     ROS_INFO_STREAM(res.msg_feedback);
     
     
