@@ -8,8 +8,8 @@
       <rightFrontJoint>right_front_wheel_hinge</rightFrontJoint>
       <leftRearJoint>left_rear_wheel_hinge</leftRearJoint>
       <rightRearJoint>right_rear_wheel_hinge</rightRearJoint>
-     <wheelSeperation>.4</wheelSeperation>
-      <wheelDiameter>.3</wheelDiameter>
+     <wheelSeperation>0.4</wheelSeperation>
+      <wheelDiameter>0.3</wheelDiameter>
       <robotBaseFrame>robot_footprint</robotBaseFrame>
       <torque>20</torque>
       <topicName>cmd_vel</topicName>
