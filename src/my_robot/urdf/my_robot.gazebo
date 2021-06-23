@@ -13,9 +13,10 @@
       <robotBaseFrame>robot_footprint</robotBaseFrame>
       <torque>20</torque>
       <topicName>cmd_vel</topicName>
+      <broadcastOdom>true</broadcastOdom>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <broadcastTF>false</broadcastTF>
+      <broadcastTF>true</broadcastTF>
    </plugin>
 </gazebo> 
   <!-- camera -->
