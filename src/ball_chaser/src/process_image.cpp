@@ -20,14 +20,16 @@ void drive_robot(float lin_x, float ang_z)
 void process_image_callback(const sensor_msgs::Image img)
 {
   // ROS_INFO_STREAM("looping over image") ;
-    int white_pixel = 255;
+    int red_val = 255;
+    int green_val = 255; 
+    int blue_val = 255;
     bool no_ball = true;
     double pixel_pos = 0; 
     
     //looping
     
     for (int i = 0; i < img.height * img.step; i=i+3) {
-       if (img.data[i] == white_pixel and img.data[i+1] == white_pixel and img.data[i+2] == white_pixel){
+       if (img.data[i] == red_val and img.data[i+1] == green_val and img.data[i+2] == blue_val){
 
             no_ball = false;
             
